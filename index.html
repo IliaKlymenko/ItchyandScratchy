@@ -4,52 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | The Itchy & Scratchy Bomb</title>
-    <style>
-      /* Убираем отступы и заполняем весь экран */
-      body, html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      /* Канвас по ширине экрана */
-      #unity-canvas {
-        width: 100%;
-        height: auto;
-        background: #231F20;
-        display: block;
-      }
-    </style>
   </head>
-  <body>
-    <canvas id="unity-canvas"></canvas>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" width=1080 height=1920 style="width: 1080px; height: 1920px; background: #231F20"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
-      function adjustCanvasSize() {
-        const canvas = document.getElementById('unity-canvas');
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        
-        // Задаем канвасу ширину и высоту, основываясь на соотношении сторон
-        const aspectRatio = 1080 / 1920; // Используйте свои реальные пропорции
-        const newWidth = width;
-        const newHeight = newWidth / aspectRatio;
-
-        // Если высота становится слишком большой, регулируем по высоте экрана
-        if (newHeight > height) {
-          const newHeightAdjusted = height;
-          const newWidthAdjusted = newHeightAdjusted * aspectRatio;
-          canvas.style.width = newWidthAdjusted + 'px';
-          canvas.style.height = newHeightAdjusted + 'px';
-        } else {
-          canvas.style.width = newWidth + 'px';
-          canvas.style.height = newHeight + 'px';
-        }
-      }
-
-      // Создаем Unity instance и подстраиваем размер канваса
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/Build.data",
         frameworkUrl: "Build/Build.framework.js",
@@ -58,13 +17,9 @@
         companyName: "NoiseLand",
         productName: "The Itchy & Scratchy Bomb",
         productVersion: "1.6",
-        matchWebGLToCanvasSize: false,  // Отключаем автоматическое масштабирование WebGL
-      }).then(() => {
-        adjustCanvasSize(); // Применяем настройки размера
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
-
-      // Добавляем событие на изменение размера окна
-      window.addEventListener('resize', adjustCanvasSize);
     </script>
   </body>
 </html>
