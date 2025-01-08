@@ -4,9 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | The Itchy & Scratchy Bomb</title>
+    <style>
+      /* Обнуляем отступы и задаем размер для body и html */
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; /* Убираем полосы прокрутки */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Канвас будет растягиваться по всей ширине и высоте экрана */
+      #unity-canvas {
+        width: 100%;
+        height: 100%;
+        background: #231F20;
+        display: block; /* Убираем ненужные отступы по бокам */
+      }
+    </style>
   </head>
-  <body style="text-align: center">
-    <canvas id="unity-canvas" width=1080 height=1920 style="width: 1080px; height: 1920px; background: #231F20"></canvas>
+  <body>
+    <canvas id="unity-canvas"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
       createUnityInstance(document.querySelector("#unity-canvas"), {
@@ -17,8 +38,7 @@
         companyName: "NoiseLand",
         productName: "The Itchy & Scratchy Bomb",
         productVersion: "1.6",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+        matchWebGLToCanvasSize: true,  // Это важно для корректного масштабирования WebGL
       });
     </script>
   </body>
